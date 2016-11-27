@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>热播电影</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/head.css">
+    <style type="text/css">
+        #Pagination{
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+</head>
+<body class="platform-android platform-cordova platform-webview">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">豆瓣电影</a>
+        </div>
+        <div id="navbar" ng-controller="searchCtroller" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right navLists headNavLists">
+            <li urls="in_theaters"><a href="javascript:;">正在热映</a></li>
+            <li urls="coming_soon"><a href="javascript:;">即将上映</a></li>
+            <li urls="top250"><a href="javascript:;">top250</a></li>
+        </ul>
+            <form class="navbar-form navbar-right" onsubmit="InitTableSearch(0)">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar navLists">
+                <li class="active" urls="in_theaters"><a href="javascript:;">正在热映</a></li>
+                <li class="wl" urls="coming_soon"><a href="javascript:;">即将上映</a></li>
+                <li class="hot" urls="top250"><a href="javascript:;">top250</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="movieList">
+                <!--这里显示搜索信息-->
+            </div>
+            <div id="Pagination"><!-- 这里显示分页 --></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

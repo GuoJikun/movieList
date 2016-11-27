@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>详情页</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/head.css">
+    <style type="text/css">
+        .backs{
+        	display: block;
+        	background-color: #eee;
+        	position: relative;
+        	top: -10px;
+    		right: 10px;
+    		outline: none;
+        }
+        .movieList img{
+        	display: block;
+    		margin: 0 auto;
+        }
+    </style>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">豆瓣电影</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active" urls="in_theaters"><a href="javascript:;">正在热映</a></li>
+                <li class="wl" urls="coming_soon"><a href="javascript:;">即将上映</a></li>
+                <li class="hot" urls="top250"><a href="javascript:;">top250</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="movieList">
+            	<input type="button" name="" value="返回" class="backs">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	var urls = window.location.href.substring(window.location.href.indexOf('#')+1,window.location.href.length);
+	function getMovieDetail(){
+		$.ajax({
+			type: 'post',
+			url: 'https://api.douban.com/v2/movie/subject/'+ urls,
+			async: true,
+			cache: false,
+			dataType: 'jsonp',
+			contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+			success: function(data){
+				console.log(data)
+				var items = '<img src="'+ data.images.large +'" alt="'+data.title+'">'+
+    						'<p>'+data.summary+'</p>';
+    		$('.movieList').append(items);
+			}
+		})
+	}
+	getMovieDetail();
+	$('.backs').click(function(){
+		window.history.go(-1);
+	})
+</script>
+</html>
